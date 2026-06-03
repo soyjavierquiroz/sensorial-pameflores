@@ -8,13 +8,13 @@ import { PlayerControls } from './components/PlayerControls';
 import { SmartPoster } from './components/SmartPoster';
 import { useVideoProviderController } from './providers/useVideoProviderController';
 import type { IVideoProvider } from './providers/IVideoProvider';
-import type { KurukinPlayerProps } from './types';
+import type { SensorialPlayerProps } from './types';
 
 function formatClassName(...classNames: Array<string | false | null | undefined>) {
   return classNames.filter(Boolean).join(' ');
 }
 
-export function KurukinPlayer({
+export function SensorialPlayer({
   provider,
   videoId,
   vslMode = false,
@@ -33,7 +33,7 @@ export function KurukinPlayer({
   hideYoutubeUi,
   smartPoster,
   className,
-}: KurukinPlayerProps) {
+}: SensorialPlayerProps) {
   const isVslMode = Boolean(vslMode);
   const isMutedPreviewEnabled = Boolean(mutedPreview.enabled) && !isVslMode;
   const shouldAutoPlay = autoplay ?? (isVslMode || isMutedPreviewEnabled);
@@ -42,7 +42,7 @@ export function KurukinPlayer({
   const isProviderImplemented = provider === 'youtube' || provider === 'bunnynet' || provider === 'html5';
   const isStickyEnabled = Boolean(stickyOnScroll ?? stickyScroll);
   const controlsVariant = isVslMode ? 'vsl' : 'standard';
-  const resumeStorageKey = `kurukin-player:resume:${provider}:${videoId}`;
+  const resumeStorageKey = `sensorial-player:resume:${provider}:${videoId}`;
   const initialMutedState = muted ?? shouldAutoPlay;
   const initialVslMutedState = isVslMode && initialMutedState;
 
@@ -103,7 +103,7 @@ export function KurukinPlayer({
       window.localStorage.setItem(resumeStorageKey, String(roundedSecond));
       lastPersistedSecondRef.current = roundedSecond;
     } catch (error) {
-      console.warn('[KurukinPlayer] No se pudo persistir el progreso del video.', error);
+      console.warn('[SensorialPlayer] No se pudo persistir el progreso del video.', error);
     }
   }, [isVslMode, onTimeUpdate, resumePlayback, resumeStorageKey]);
 
@@ -119,7 +119,7 @@ export function KurukinPlayer({
       window.localStorage.removeItem(resumeStorageKey);
       lastPersistedSecondRef.current = -1;
     } catch (error) {
-      console.warn('[KurukinPlayer] No se pudo limpiar el progreso guardado.', error);
+      console.warn('[SensorialPlayer] No se pudo limpiar el progreso guardado.', error);
     }
   }, [resumePlayback, resumeStorageKey]);
 
@@ -311,7 +311,7 @@ export function KurukinPlayer({
       hasRestoredPlaybackRef.current = true;
     } catch (error) {
       hasRestoredPlaybackRef.current = true;
-      console.warn('[KurukinPlayer] No se pudo restaurar el progreso guardado.', error);
+      console.warn('[SensorialPlayer] No se pudo restaurar el progreso guardado.', error);
     }
   }, [controller.providerRef, duration, isReady, isVslMode, resumePlayback, resumeStorageKey]);
 
@@ -463,7 +463,7 @@ export function KurukinPlayer({
 
       await containerElement.requestFullscreen();
     } catch (error) {
-      console.warn('[KurukinPlayer] No se pudo alternar pantalla completa.', error);
+      console.warn('[SensorialPlayer] No se pudo alternar pantalla completa.', error);
     }
   }, []);
 

@@ -1,8 +1,8 @@
-# Kurukin Video Player
+# Sensorial Video Player
 
 ## 🚀 Visión General
 
-`kurukin-video-player-pkg` es un Universal Video Engine construido con React y TypeScript para unificar múltiples proveedores de video bajo una sola API de UI.
+`sensorial-video-player-pkg` es un Universal Video Engine construido con React y TypeScript para unificar múltiples proveedores de video bajo una sola API de UI.
 
 La arquitectura sigue un patrón Estrategia:
 
@@ -18,7 +18,7 @@ Cuando se usa `provider="bunnynet"`, el player monta un elemento `<video>` nativ
 
 Flujo técnico:
 
-- `KurukinPlayer` delega en `useVideoProviderController`.
+- `SensorialPlayer` delega en `useVideoProviderController`.
 - El controller selecciona `useBunnyProvider`.
 - `useBunnyProvider` crea un provider nativo sobre el `<video>`.
 - Si el navegador soporta `hls.js`, se hace `loadSource(videoId)` y `attachMedia(videoElement)`.
@@ -117,15 +117,15 @@ Ejemplo de consumo con Bunny.net en modo VSL, capturando el tiempo actual para s
 
 ```tsx
 import { useState } from 'react';
-import { KurukinPlayer } from 'kurukin-video-player';
-import 'kurukin-video-player/style.css';
+import { SensorialPlayer } from 'sensorial-video-player';
+import 'sensorial-video-player/style.css';
 
 export function SalesHero() {
   const [currentTime, setCurrentTime] = useState(0);
 
   return (
     <section className="mx-auto max-w-5xl space-y-4">
-      <KurukinPlayer
+      <SensorialPlayer
         provider="bunnynet"
         videoId="https://vz-xxxxxxxx.b-cdn.net/playlist.m3u8"
         vslMode
@@ -154,13 +154,13 @@ El adapter de YouTube ya consume la misma API premium del player. Eso significa 
 
 ```tsx
 import { useState } from 'react';
-import { KurukinPlayer } from 'kurukin-video-player';
+import { SensorialPlayer } from 'sensorial-video-player';
 
 export function YoutubeVslDemo() {
   const [currentTime, setCurrentTime] = useState(0);
 
   return (
-    <KurukinPlayer
+    <SensorialPlayer
       provider="youtube"
       videoId="aQhTmuZiKOY"
       vslMode={true}

@@ -1,17 +1,17 @@
 {
-  "name": "kurukin-video-player",
+  "name": "sensorial-video-player",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "main": "./dist/kurukin-video-player.umd.js",
-  "module": "./dist/kurukin-video-player.es.js",
+  "main": "./dist/sensorial-video-player.umd.js",
+  "module": "./dist/sensorial-video-player.es.js",
   "style": "./dist/style.css",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/kurukin-video-player.es.js",
-      "require": "./dist/kurukin-video-player.umd.js"
+      "import": "./dist/sensorial-video-player.es.js",
+      "require": "./dist/sensorial-video-player.umd.js"
     },
     "./style.css": "./dist/style.css"
   },

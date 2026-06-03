@@ -101,7 +101,7 @@ export function useBunnyProvider({
       videoElement.src = videoId;
       console.log('[BunnyProvider] Usando fallback nativo HLS para Safari:', videoId);
     } else {
-      console.warn('[KurukinPlayer] HLS no es compatible en este navegador para Bunny.net.');
+      console.warn('[SensorialPlayer] HLS no es compatible en este navegador para Bunny.net.');
     }
 
     return () => {

@@ -7,14 +7,14 @@ export default defineConfig({
   plugins: [
     react(),
     // Genera las definiciones de TypeScript para tus otros proyectos
-    dts({ include: ['src/kurukin-video-player'] })
+    dts({ include: ['src/sensorial-video-player'] })
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/kurukin-video-player/index.ts'),
-      name: 'KurukinVideoPlayer',
+      entry: resolve(__dirname, 'src/sensorial-video-player/index.ts'),
+      name: 'SensorialVideoPlayer',
       formats: ['es', 'umd'],
-      fileName: (format) => `kurukin-video-player.${format}.js`,
+      fileName: (format) => `sensorial-video-player.${format}.js`,
       cssFileName: 'style',
     },
     rollupOptions: {

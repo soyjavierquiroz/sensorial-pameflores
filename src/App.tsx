@@ -27,6 +27,7 @@ function RoutedApp() {
   return (
     <Routes>
       <Route path="/" element={<ExpertTheme />} />
+      <Route path="/libro" element={<ExpertTheme />} />
       <Route path="/confirmacion" element={<Success />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

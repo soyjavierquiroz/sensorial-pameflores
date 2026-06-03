@@ -1,7 +1,7 @@
 import { Volume2 } from 'lucide-react';
 import { DNA } from '../../../dna.config';
 import funnelConfig from '../../../core/config/funnel.config';
-import { KurukinPlayer as ExpertVideoPlayer } from './components/video-player/src/kurukin-video-player';
+import { SensorialPlayer as ExpertVideoPlayer } from './components/video-player/src/sensorial-video-player';
 
 interface ExpertHeroProps {
   onReveal?: () => void;

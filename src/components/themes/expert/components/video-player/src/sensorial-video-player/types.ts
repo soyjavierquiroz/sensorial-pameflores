@@ -30,7 +30,7 @@ export interface SmartPosterConfig {
   buttonText?: string;
 }
 
-export interface KurukinPlayerProps {
+export interface SensorialPlayerProps {
   provider: VideoProvider;
   videoId: string;
   vslMode?: boolean;

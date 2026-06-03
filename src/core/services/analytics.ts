@@ -163,6 +163,11 @@ let initializedTikTokPixelId: string | null = null;
 
 const isBrowserEnvironment = (): boolean => typeof window !== 'undefined' && typeof document !== 'undefined';
 
+const ORGANIC_ROUTE_PREFIX = '/libro';
+
+const isOrganicRoute = (): boolean =>
+  isBrowserEnvironment() && window.location.pathname.startsWith(ORGANIC_ROUTE_PREFIX);
+
 const normalizeNullable = (value: string | null | undefined): string | null => {
   if (typeof value !== 'string') {
     return null;
@@ -462,7 +467,7 @@ const ensureFbqStub = (): MetaFbqFunction => {
 };
 
 const ensureMetaReady = async (pixelId: string): Promise<void> => {
-  if (!isBrowserEnvironment()) {
+  if (!isBrowserEnvironment() || isOrganicRoute()) {
     return;
   }
 
@@ -542,7 +547,7 @@ const ensureTikTokStub = (): TikTokTrackFunction => {
 };
 
 const ensureTikTokReady = async (pixelId: string): Promise<void> => {
-  if (!isBrowserEnvironment()) {
+  if (!isBrowserEnvironment() || isOrganicRoute()) {
     return;
   }
 
@@ -625,6 +630,18 @@ const buildCapiPayload = ({
 const isMetaStandardEvent = (eventName: string): boolean => META_STANDARD_EVENTS.has(eventName);
 
 const trackEvent = async (eventName: string, data: Record<string, unknown> = {}): Promise<TrackEventResult> => {
+  if (isOrganicRoute()) {
+    console.warn('[Analytics] Modo Organico Activo: Evento silenciado para evitar contaminar el pixel.');
+
+    return {
+      eventId: 'organic-route-suppressed',
+      metaBrowserSent: false,
+      tiktokBrowserSent: false,
+      capiSent: false,
+      capiStatus: null,
+    };
+  }
+
   const { anonymousId, attribution, cookies } = ensureInitialized();
   const eventId = createEventId();
   const eventTime = Math.floor(Date.now() / 1000);

@@ -48,7 +48,7 @@ export function PlayerControls({
     <div
       className={
         isMinimal
-          ? 'kurukin-vsl-controls absolute inset-x-0 bottom-0 z-10 flex justify-center bg-gradient-to-t from-black/55 via-black/10 to-transparent px-4 pb-4 pt-10'
+          ? 'sensorial-vsl-controls absolute inset-x-0 bottom-0 z-10 flex justify-center bg-gradient-to-t from-black/55 via-black/10 to-transparent px-4 pb-4 pt-10'
           : 'absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/82 via-black/38 to-transparent px-3 pb-3 pt-7'
       }
     >
