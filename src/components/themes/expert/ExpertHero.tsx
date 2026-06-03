@@ -1,6 +1,5 @@
 import { Volume2 } from 'lucide-react';
-import { DNA } from '../../../dna.config';
-import funnelConfig from '../../../core/config/funnel.config';
+import { useExpertFunnel } from './ExpertFunnelContext';
 import { SensorialPlayer as ExpertVideoPlayer } from './components/video-player/src/sensorial-video-player';
 
 interface ExpertHeroProps {
@@ -8,6 +7,8 @@ interface ExpertHeroProps {
 }
 
 export function ExpertHero({ onReveal }: ExpertHeroProps) {
+  const { dna, funnelConfig, version } = useExpertFunnel();
+  const isV2 = version === 'v2';
   const heroVideo = funnelConfig.media.heroVideo;
   const revealAtSeconds = heroVideo.revealAtSeconds ?? 292;
 
@@ -20,22 +21,24 @@ export function ExpertHero({ onReveal }: ExpertHeroProps) {
   };
 
   return (
-    <section className="border-b border-gray-200 bg-white pb-[60px]">
-      <div className="mx-auto max-w-[1225px] px-4 pt-4 sm:px-6">
-        <div className="mx-auto mt-4 w-full max-w-[1200px] md:mt-8 xl:max-w-[1300px]">
-          <h1 className="font-sans mt-[20px] text-center text-[1.5rem] font-black uppercase leading-[1.1] tracking-[-0.02em] text-gray-900 sm:text-[2.4rem] lg:text-[3rem]">
-            {DNA.copy.headline}{' '}
-            <span className="text-brand-primary">{DNA.copy.headlineHighlight}</span>
+    <section className={isV2 ? 'border-b border-gray-200 bg-white pb-12 sm:pb-16' : 'border-b border-gray-200 bg-white pb-[60px]'}>
+      <div className={isV2 ? 'mx-auto max-w-[1225px] px-4 pt-5 sm:px-6' : 'mx-auto max-w-[1225px] px-4 pt-4 sm:px-6'}>
+        <div className={isV2 ? 'mx-auto mt-2 w-full max-w-[1120px] md:mt-8 xl:max-w-[1200px]' : 'mx-auto mt-4 w-full max-w-[1200px] md:mt-8 xl:max-w-[1300px]'}>
+          <h1 className={isV2 ? 'font-sans mt-4 text-center text-[1.85rem] font-black leading-[1.08] text-gray-950 sm:text-[2.75rem] lg:text-[3.4rem]' : 'font-sans mt-[20px] text-center text-[1.5rem] font-black uppercase leading-[1.1] tracking-[-0.02em] text-gray-900 sm:text-[2.4rem] lg:text-[3rem]'}>
+            {dna.copy.headline}{' '}
+            {dna.copy.headlineHighlight ? (
+              <span className="text-brand-primary">{dna.copy.headlineHighlight}</span>
+            ) : null}
           </h1>
 
-          {DNA.copy.subheadline && (
-            <p className="font-sans mx-auto mt-4 w-full text-center text-[1.1rem] font-medium leading-relaxed text-gray-700 sm:mt-6 sm:text-[1.3rem]">
-              {DNA.copy.subheadline}
+          {dna.copy.subheadline && (
+            <p className={isV2 ? 'font-sans mx-auto mt-5 w-full max-w-[860px] text-center text-[1.05rem] font-semibold leading-relaxed text-gray-700 sm:mt-6 sm:text-[1.35rem]' : 'font-sans mx-auto mt-4 w-full text-center text-[1.1rem] font-medium leading-relaxed text-gray-700 sm:mt-6 sm:text-[1.3rem]'}>
+              {dna.copy.subheadline}
             </p>
           )}
         </div>
 
-        <div className="mx-auto mt-[10px] flex max-w-[850px] flex-col items-center md:mt-6">
+        <div className={isV2 ? 'mx-auto mt-5 flex max-w-[850px] flex-col items-center md:mt-8' : 'mx-auto mt-[10px] flex max-w-[850px] flex-col items-center md:mt-6'}>
           <div className="w-full">
             <div className="relative flex w-full flex-col overflow-hidden rounded-2xl border-[4px] border-brand-primary bg-gray-900 shadow-2xl md:border-[6px]">
               <div className="flex items-center justify-center gap-[5px] bg-brand-accent px-[5px] py-[11px] text-center text-white">
@@ -52,8 +55,8 @@ export function ExpertHero({ onReveal }: ExpertHeroProps) {
                       provider={heroVideo.provider}
                       videoId={heroVideo.videoId}
                       vslMode={true}
-                      autoplay={true}
-                      muted={true}
+                      autoplay={heroVideo.autoplay ?? true}
+                      muted={heroVideo.muted ?? true}
                       idleHideControls={true}
                       allowFullscreen={false}
                       resumePlayback={heroVideo.resumePlayback}

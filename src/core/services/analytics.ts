@@ -163,10 +163,13 @@ let initializedTikTokPixelId: string | null = null;
 
 const isBrowserEnvironment = (): boolean => typeof window !== 'undefined' && typeof document !== 'undefined';
 
-const ORGANIC_ROUTE_PREFIX = '/libro';
+const ORGANIC_ROUTES = new Set(['/libro', '/libro-v1']);
+
+const normalizePathname = (pathname: string): string =>
+  pathname === '/' ? pathname : pathname.replace(/\/+$/, '');
 
 const isOrganicRoute = (): boolean =>
-  isBrowserEnvironment() && window.location.pathname.startsWith(ORGANIC_ROUTE_PREFIX);
+  isBrowserEnvironment() && ORGANIC_ROUTES.has(normalizePathname(window.location.pathname));
 
 const normalizeNullable = (value: string | null | undefined): string | null => {
   if (typeof value !== 'string') {

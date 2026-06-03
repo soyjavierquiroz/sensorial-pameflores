@@ -1,7 +1,9 @@
-import { DNA } from '../../../dna.config';
 import { ExpertCtaButton } from './ExpertCtaButton';
+import { useExpertFunnel } from './ExpertFunnelContext';
 
 export function ExpertSalesLetter() {
+  const { dna } = useExpertFunnel();
+
   return (
     <section className="bg-white px-4 py-16 sm:px-6">
       <div className="mx-auto max-w-[800px]">
@@ -15,14 +17,14 @@ export function ExpertSalesLetter() {
             className="mb-8 text-center text-3xl font-black leading-tight md:text-4xl"
             style={{ color: 'rgb(var(--color-text-main))' }}
           >
-            {DNA.copy.salesLetter.title}
+            {dna.copy.salesLetter.title}
           </h2>
 
           <div
             className="space-y-6 text-lg leading-relaxed md:text-xl"
             style={{ color: 'rgb(var(--color-text-muted))' }}
           >
-            {DNA.copy.salesLetter.part1.map((paragraph, index) => (
+            {dna.copy.salesLetter.part1.map((paragraph, index) => (
               <p key={`p1-${index}`}>{paragraph}</p>
             ))}
 
@@ -33,17 +35,17 @@ export function ExpertSalesLetter() {
                 backgroundColor: 'rgba(var(--color-brand-primary), 0.05)',
               }}
             >
-              {DNA.copy.salesLetter.highlight}
+              {dna.copy.salesLetter.highlight}
             </p>
 
-            {DNA.copy.salesLetter.part2.map((paragraph, index) => (
+            {dna.copy.salesLetter.part2.map((paragraph, index) => (
               <p key={`p2-${index}`}>{paragraph}</p>
             ))}
           </div>
 
           <div className="mb-10 mt-12">
             <img
-              src={DNA.copy.salesLetter.image}
+              src={dna.copy.salesLetter.image}
               alt="Pame Flores"
               className="h-auto w-full rounded-2xl border-4 border-white shadow-lg"
             />
@@ -53,7 +55,7 @@ export function ExpertSalesLetter() {
             <div className="mx-auto mb-4 max-w-md">
               <ExpertCtaButton
                 href="#checkout"
-                label={DNA.copy.salesLetter.ctaText}
+                label={dna.copy.salesLetter.ctaText}
                 fullWidth={true}
               />
             </div>
@@ -61,7 +63,7 @@ export function ExpertSalesLetter() {
               className="font-mono text-sm font-bold uppercase tracking-wide"
               style={{ color: 'rgb(var(--color-text-muted))' }}
             >
-              {DNA.copy.specialOfferGuarantee}
+              {dna.copy.specialOfferGuarantee}
             </div>
           </div>
         </div>

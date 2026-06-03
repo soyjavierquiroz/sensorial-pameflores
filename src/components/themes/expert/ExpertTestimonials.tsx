@@ -1,8 +1,10 @@
-import { DNA } from '../../../dna.config';
 import { ExpertCtaButton } from './ExpertCtaButton';
+import { useExpertFunnel } from './ExpertFunnelContext';
 
 export function ExpertTestimonials() {
-  if (!DNA.copy.testimonials?.items?.length) return null;
+  const { dna } = useExpertFunnel();
+
+  if (!dna.copy.testimonials?.items?.length) return null;
 
   return (
     <section className="border-t border-gray-100 bg-gray-50 px-4 py-16 sm:px-6">
@@ -12,18 +14,18 @@ export function ExpertTestimonials() {
             className="text-3xl font-black leading-tight tracking-tight md:text-5xl"
             style={{ color: 'rgb(var(--color-text-main))' }}
           >
-            {DNA.copy.testimonials.headline}
+            {dna.copy.testimonials.headline}
           </h2>
           <p
             className="mx-auto mt-6 max-w-3xl text-xl font-medium leading-relaxed md:text-2xl"
             style={{ color: 'rgb(var(--color-text-muted))' }}
           >
-            {DNA.copy.testimonials.subtitle}
+            {dna.copy.testimonials.subtitle}
           </p>
         </div>
 
         <div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {DNA.copy.testimonials.items.map((testimonial, idx) => (
+          {dna.copy.testimonials.items.map((testimonial, idx) => (
             <div
               key={idx}
               className="flex flex-col items-center rounded-3xl border border-gray-100 bg-white p-6 text-center shadow-xl transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl"
@@ -54,13 +56,13 @@ export function ExpertTestimonials() {
 
         <div className="mx-auto max-w-md text-center">
           <div className="mb-4">
-            <ExpertCtaButton href="#checkout" label={DNA.copy.ctaText} fullWidth={true} />
+            <ExpertCtaButton href="#checkout" label={dna.copy.ctaText} fullWidth={true} />
           </div>
           <div
             className="font-mono text-sm font-bold uppercase tracking-wide"
             style={{ color: 'rgb(var(--color-text-muted))' }}
           >
-            {DNA.copy.specialOfferGuarantee}
+            {dna.copy.specialOfferGuarantee}
           </div>
         </div>
       </div>

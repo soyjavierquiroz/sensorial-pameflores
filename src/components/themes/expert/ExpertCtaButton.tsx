@@ -1,6 +1,6 @@
 import type { ComponentPropsWithoutRef, MouseEvent } from 'react';
-import { DNA, dnaNumericPrices } from '../../../dna.config';
 import { analytics } from '../../../core/services/analytics';
+import { useExpertFunnel } from './ExpertFunnelContext';
 
 interface ExpertCtaButtonProps extends ComponentPropsWithoutRef<'a'> {
   label: string;
@@ -17,14 +17,15 @@ export function ExpertCtaButton({
   onClick,
   ...props
 }: ExpertCtaButtonProps) {
+  const { dna, numericPrices } = useExpertFunnel();
   // LOGICA ARQUITECTÓNICA: Si apunta al checkout, le inyectamos la variable del DNA
-  const finalHref = href === '#checkout' ? DNA.checkoutUrl : href;
+  const finalHref = href === '#checkout' ? dna.checkoutUrl : href;
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     void analytics.trackEvent('InitiateCheckout', {
-      content_name: DNA.copy.productName,
+      content_name: dna.copy.productName,
       currency: 'USD',
-      value: dnaNumericPrices.main,
+      value: numericPrices.main,
       checkout_url: finalHref,
     });
 

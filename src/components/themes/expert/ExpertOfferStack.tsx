@@ -1,5 +1,6 @@
 import { Check, CreditCard, Lock, ShieldCheck } from 'lucide-react';
-import { DNA } from '../../../dna.config';
+import { ExpertCtaButton } from './ExpertCtaButton';
+import { useExpertFunnel } from './ExpertFunnelContext';
 
 const certaintyItems = [
   { id: 'secure-payment', label: 'Pago 100% Seguro', icon: Lock },
@@ -8,15 +9,27 @@ const certaintyItems = [
 ] as const;
 
 export function ExpertOfferStack() {
+  const { dna, version } = useExpertFunnel();
+  const savings = dna.prices.savings ?? String(Number(dna.prices.totalValue) - Number(dna.prices.main));
+  const stackItems = version === 'v2' && dna.copy.fastActionBonus.value
+    ? [
+        ...dna.copy.modules,
+        {
+          title: dna.copy.fastActionBonus.title,
+          value: dna.copy.fastActionBonus.value,
+        },
+      ]
+    : dna.copy.modules;
+
   return (
     <section className="px-4 py-12 sm:px-6 sm:py-16">
       <div className="max-w-4xl mx-auto rounded-sm border-4 border-dashed border-brand-primary bg-white p-8 shadow-2xl md:p-12">
         <h2 className="mb-8 text-center text-4xl font-black uppercase text-gray-900">
-          {DNA.copy.offerStackTitle}
+          {dna.copy.offerStackTitle}
         </h2>
 
         <ul className="space-y-4">
-          {DNA.copy.modules.map((module) => (
+          {stackItems.map((module) => (
             <li
               key={`${module.title}-${module.value}`}
               className="flex items-start gap-3 rounded-sm border border-gray-200 bg-gray-50 px-4 py-4 shadow-sm sm:items-center"
@@ -33,18 +46,24 @@ export function ExpertOfferStack() {
         <hr className="my-6 border-2 border-gray-300" />
 
         <div className="space-y-3">
-          <p className="text-center text-2xl font-bold text-gray-900">Valor Total: ${DNA.prices.totalValue}</p>
-          <p className="text-center text-xl text-gray-500 line-through">Precio Regular: ${DNA.prices.regularPrice}</p>
-          <p className="my-4 animate-pulse text-center text-5xl font-black text-brand-primary">¡HOY SOLO ${DNA.prices.main}!</p>
+          <p className="text-center text-2xl font-bold text-gray-900">
+            {version === 'v2' ? 'Precio Total' : 'Valor Total'}: ${dna.prices.totalValue}
+          </p>
+          {version === 'v2' ? (
+            <p className="text-center text-xl font-black text-brand-accent">Te ahorras US${savings}</p>
+          ) : (
+            <p className="text-center text-xl text-gray-500 line-through">Precio Regular: ${dna.prices.regularPrice}</p>
+          )}
+          <p className="my-4 animate-pulse text-center text-5xl font-black text-brand-primary">¡HOY SOLO ${dna.prices.main}!</p>
         </div>
 
         <div className="mt-8">
-          <a
+          <ExpertCtaButton
             href="#checkout"
-            className="block w-full rounded-sm bg-cta py-6 text-center text-2xl font-black uppercase text-[rgb(var(--color-cta-text))] shadow-[0_5px_0_rgb(var(--color-brand-primary))] transition-all transform hover:translate-y-1 hover:bg-cta-hover hover:shadow-none"
-          >
-            {`¡SÍ, QUIERO SER PARTE!`}
-          </a>
+            label={version === 'v2' ? dna.copy.finalCtaText ?? 'Quiero comprar ahora' : '¡SÍ, QUIERO SER PARTE!'}
+            fullWidth
+            className="py-6 text-2xl"
+          />
 
           <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm font-bold text-gray-600">
             {certaintyItems.map(({ id, label, icon: Icon }) => (

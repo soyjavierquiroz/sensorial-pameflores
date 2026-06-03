@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { Minus, Plus } from 'lucide-react';
-import { DNA } from '../../../dna.config';
 import { ExpertCtaButton } from './ExpertCtaButton';
+import { useExpertFunnel } from './ExpertFunnelContext';
 
 export function ExpertFAQ() {
+  const { dna } = useExpertFunnel();
   const [openIndex, setOpenIndex] = useState(0);
 
   // Si no hay FAQs en el DNA, no renderizamos el bloque
-  if (!DNA.copy.faq?.items?.length) return null;
+  if (!dna.copy.faq?.items?.length) return null;
 
   return (
     <section 
@@ -22,14 +23,14 @@ export function ExpertFAQ() {
             className="text-[2rem] font-black leading-none tracking-tight sm:text-[2.5rem] uppercase"
             style={{ color: 'rgb(var(--color-text-main))' }}
           >
-            {DNA.copy.faq.title}
+            {dna.copy.faq.title}
           </h2>
           <div className="h-1 flex-1 rounded-full" style={{ backgroundColor: 'rgb(var(--color-brand-accent))' }} />
         </div>
 
         {/* Acordeón de Preguntas */}
         <div className="space-y-4">
-          {DNA.copy.faq.items.map((item, index) => {
+          {dna.copy.faq.items.map((item, index) => {
             const isOpen = openIndex === index;
 
             return (
@@ -71,7 +72,7 @@ export function ExpertFAQ() {
           <div className="mb-4">
             <ExpertCtaButton
               href="#checkout"
-              label={DNA.copy.ctaText}
+              label={dna.copy.ctaText}
               fullWidth={true}
             />
           </div>
@@ -79,7 +80,7 @@ export function ExpertFAQ() {
             className="font-mono text-sm uppercase tracking-wide font-bold" 
             style={{ color: 'rgb(var(--color-text-muted))' }}
           >
-            {DNA.copy.specialOfferGuarantee}
+            {dna.copy.specialOfferGuarantee}
           </div>
         </div>
         

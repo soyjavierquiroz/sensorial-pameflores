@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Check, Clock } from 'lucide-react';
-import { DNA } from '../../../dna.config';
 import { ExpertCtaButton } from './ExpertCtaButton';
 import type { ExpertBonusItem } from './expertContent';
 import { expertBrandAssets } from './expertContent';
+import { useExpertFunnel } from './ExpertFunnelContext';
 
 interface ExpertBonusStackProps {
   bonuses: ExpertBonusItem[];
@@ -19,6 +19,7 @@ function formatUsd(value: number) {
 }
 
 export function ExpertBonusStack({ bonuses }: ExpertBonusStackProps) {
+  const { dna } = useExpertFunnel();
   // Inicializamos el contador en 60 minutos (3600 segundos)
   const [timeLeft, setTimeLeft] = useState(3600);
 
@@ -43,10 +44,10 @@ export function ExpertBonusStack({ bonuses }: ExpertBonusStackProps) {
         
         <div className="text-center mb-8">
           <p className="expert-headline text-[1.35rem] font-semibold italic text-brand-accent sm:text-[1.65rem]">
-            {DNA.copy.fastActionBonus.timeLimit}
+            {dna.copy.fastActionBonus.timeLimit}
           </p>
           <h2 className="expert-headline mt-2 text-[2rem] font-black uppercase leading-none tracking-[-0.05em] text-[#2d2d2d] sm:text-[3rem]">
-            Todo Lo Que Recibes Con "{DNA.copy.productName}" Hoy
+            Todo Lo Que Recibes Con "{dna.copy.productName}" Hoy
           </h2>
         </div>
 
@@ -82,17 +83,17 @@ export function ExpertBonusStack({ bonuses }: ExpertBonusStackProps) {
             <div>
               <p className="expert-body text-xs font-bold uppercase tracking-[0.24em] text-brand-accent">Valor Total</p>
               <p className="expert-headline mt-2 text-[2rem] font-extrabold text-brand-primary sm:text-[2.35rem]">
-                <span className="line-through">${DNA.prices.totalValue}</span>
+                <span className="line-through">${dna.prices.totalValue}</span>
               </p>
             </div>
             <div>
               <p className="expert-body text-xs font-bold uppercase tracking-[0.24em] text-brand-accent">Precio de Hoy</p>
-              <p className="expert-headline mt-2 text-[2rem] font-extrabold text-[#2d2d2d] sm:text-[2.35rem]">${DNA.prices.main}</p>
+              <p className="expert-headline mt-2 text-[2rem] font-extrabold text-[#2d2d2d] sm:text-[2.35rem]">${dna.prices.main}</p>
             </div>
             <div>
               <p className="expert-body text-xs font-bold uppercase tracking-[0.24em] text-brand-accent">Precio Regular</p>
               <p className="expert-headline mt-2 text-[1.3rem] font-extrabold leading-tight text-[#2d2d2d] sm:text-[1.55rem]">
-                ${DNA.prices.regularPrice}
+                ${dna.prices.regularPrice}
               </p>
             </div>
           </div>
@@ -132,8 +133,8 @@ export function ExpertBonusStack({ bonuses }: ExpertBonusStackProps) {
         <div className="mx-auto mt-10 max-w-[680px]">
           <ExpertCtaButton
             href="#checkout"
-            label={`Sí, quiero activar ${DNA.copy.productName}`}
-            subLabel={`Hoy por $${DNA.prices.main} • Acceso inmediato y seguro`}
+            label={`Sí, quiero activar ${dna.copy.productName}`}
+            subLabel={`Hoy por $${dna.prices.main} • Acceso inmediato y seguro`}
             fullWidth
           />
         </div>

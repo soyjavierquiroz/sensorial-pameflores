@@ -1,8 +1,11 @@
 import { CheckCircle2 } from 'lucide-react';
-import { DNA } from '../../../dna.config';
 import { ExpertCtaButton } from './ExpertCtaButton';
+import { useExpertFunnel } from './ExpertFunnelContext';
 
 export function ExpertConfidenceBooster() {
+  const { dna, version } = useExpertFunnel();
+  const savings = dna.prices.savings ?? String(Number(dna.prices.totalValue) - Number(dna.prices.main));
+
   return (
     <section className="bg-white px-4 py-16 sm:px-6">
       <div className="mx-auto max-w-[800px]">
@@ -11,13 +14,13 @@ export function ExpertConfidenceBooster() {
             className="mb-6 text-3xl font-black leading-tight md:text-4xl"
             style={{ color: 'rgb(var(--color-brand-primary))' }}
           >
-            {DNA.copy.confidenceBooster.headline}
+            {dna.copy.confidenceBooster.headline}
           </h2>
           <div
             className="mb-8 space-y-4 text-lg md:text-xl"
             style={{ color: 'rgb(var(--color-text-main))' }}
           >
-            {DNA.copy.confidenceBooster.paragraphs.map((paragraph, index) => (
+            {dna.copy.confidenceBooster.paragraphs.map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
             ))}
           </div>
@@ -30,7 +33,7 @@ export function ExpertConfidenceBooster() {
               Incluye:
             </p>
             <ul className="space-y-3">
-              {DNA.copy.confidenceBooster.bullets.map((bullet, index) => (
+              {dna.copy.confidenceBooster.bullets.map((bullet, index) => (
                 <li
                   key={index}
                   className="flex items-start gap-3 text-lg font-medium"
@@ -50,8 +53,8 @@ export function ExpertConfidenceBooster() {
         <div className="mb-16 flex flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-2xl transition-transform hover:-translate-y-1 md:flex-row">
           <div className="relative flex items-center justify-center bg-gray-50 p-6 md:w-2/5">
             <img
-              src={DNA.copy.sewingBonus.image}
-              alt={DNA.copy.sewingBonus.title}
+              src={dna.copy.sewingBonus.image}
+              alt={dna.copy.sewingBonus.title}
               className="relative z-10 h-auto w-full rounded-2xl object-contain shadow-sm transition-transform duration-500 hover:scale-105"
             />
           </div>
@@ -69,13 +72,13 @@ export function ExpertConfidenceBooster() {
               className="mb-4 text-2xl font-black leading-tight md:text-3xl"
               style={{ color: 'rgb(var(--color-text-main))' }}
             >
-              {DNA.copy.sewingBonus.title}
+              {dna.copy.sewingBonus.title}
             </h3>
             <p
               className="text-lg leading-relaxed"
               style={{ color: 'rgb(var(--color-text-muted))' }}
             >
-              {DNA.copy.sewingBonus.description}
+              {dna.copy.sewingBonus.description}
             </p>
           </div>
         </div>
@@ -86,22 +89,25 @@ export function ExpertConfidenceBooster() {
         >
           <div className="mb-6">
             <span className="mb-1 block text-xl font-medium text-gray-400 line-through">
-              Precio original US${DNA.prices.regular}
+              {version === 'v2' ? `Precio Total US$${dna.prices.totalValue}` : `Precio original US$${dna.prices.regular}`}
             </span>
+            {version === 'v2' ? (
+              <p className="mb-2 text-xl font-black text-brand-accent">Te ahorras US${savings}</p>
+            ) : null}
             <div
               className="text-4xl font-black md:text-5xl"
               style={{ color: 'rgb(var(--color-text-main))' }}
             >
               Hoy solo{' '}
               <span style={{ color: 'rgb(var(--color-brand-primary))' }}>
-                US${DNA.prices.main}
+                US${dna.prices.main}
               </span>
             </div>
           </div>
           <div className="mx-auto mb-6 max-w-md">
             <ExpertCtaButton
               href="#checkout"
-              label="¡Quiero Comprar ahora!"
+              label={dna.copy.finalCtaText ?? '¡Quiero Comprar ahora!'}
               fullWidth={true}
             />
           </div>
@@ -109,7 +115,7 @@ export function ExpertConfidenceBooster() {
             className="font-mono text-sm font-bold uppercase tracking-wide"
             style={{ color: 'rgb(var(--color-text-muted))' }}
           >
-            {DNA.copy.specialOfferGuarantee}
+            {dna.copy.specialOfferGuarantee}
           </div>
         </div>
       </div>

@@ -34,6 +34,7 @@ export interface DnaConfig {
     totalValue: string;
     regular: string;
     regularPrice: string;
+    savings?: string;
   };
   copy: {
     productName: string;
@@ -58,6 +59,11 @@ export interface DnaConfig {
     specialOfferImage: string;
     presentationPreTitle: string;
     presentationTitle: string;
+    presentationImage: string;
+    presentationCtaText?: string;
+    finalCtaText?: string;
+    showPainPoints?: boolean;
+    showSalesLetter?: boolean;
     confidenceBooster: {
       headline: string;
       paragraphs: string[];
@@ -84,6 +90,8 @@ export interface DnaConfig {
       timeLimit: string;
       title: string;
       subtitle: string;
+      value?: string;
+      image?: string;
     };
     testimonials: {
       headline: string;
@@ -149,7 +157,7 @@ function toRgbTriplet(value: string) {
   return triplet.trim();
 }
 
-export const DNA = {
+export const DNA_V1 = {
   theme: 'expert',
   fonts: {
     sans: 'Montserrat',
@@ -223,6 +231,9 @@ export const DNA = {
     specialOfferImage: '/assets/pameflores.webp',
     presentationPreTitle: 'Te presento:',
     presentationTitle: '<span style="color: rgb(var(--color-brand-primary))">Lánzate</span> con tu primer<br/>libro sensorial',
+    presentationImage: '/assets/curso.webp',
+    showPainPoints: true,
+    showSalesLetter: true,
     confidenceBooster: {
       headline: '¿Miedo a no saber si vas por buen camino?',
       paragraphs: [
@@ -284,7 +295,7 @@ export const DNA = {
         title: '2 kits adicionales con diseños novedosos',
         value: '$47',
         description:
-          'Diferénciate y aumenta tus ingresos con 2 kits adicionales listos para crear y vender. Tendrás más opciones para ofrecer and más oportunidades de generar ingresos con libros sensoriales tiernos, atractivos y vendibles.',
+          'Diferénciate y aumenta tus ingresos con 2 kits adicionales listos para crear y vender. Tendrás más opciones para ofrecer y más oportunidades de generar ingresos con libros sensoriales tiernos, atractivos y vendibles.',
         image: '/assets/2proyectos_de_juguetes_didacticos.webp',
       },
       {
@@ -408,13 +419,166 @@ export const DNA = {
   },
 } as const satisfies DnaConfig;
 
-export const dnaNumericPrices = {
-  main: parsePrice(DNA.prices.main),
-  bump: parsePrice(DNA.prices.bump),
-  totalValue: parsePrice(DNA.prices.totalValue),
-  regular: parsePrice(DNA.prices.regular),
-  regularPrice: parsePrice(DNA.prices.regularPrice),
-} as const;
+export const DNA_V2 = {
+  ...DNA_V1,
+  vslVideoId: 'https://vz-ed6c1082-e76.b-cdn.net/a0ab4472-cf7a-4d8d-8956-95601ca89c76/playlist.m3u8',
+  prices: {
+    ...DNA_V1.prices,
+    main: '27',
+    bump: '0',
+    totalValue: '553',
+    regular: '100',
+    regularPrice: '100',
+    savings: '526',
+  },
+  copy: {
+    ...DNA_V1.copy,
+    productName: 'Lánzate con tu Primer Libro Sensorial',
+    headline: 'Descubre cómo empezar a generar ingresos extra con libros sensoriales desde casa esta misma semana.',
+    headlineHighlight: '',
+    subheadline:
+      'Y da tus primeros pasos para construir un negocio propio que combine tu amor por los niños y por las manualidades.',
+    ctaText: 'Estoy lista para empezar',
+    salesLetter: {
+      ...DNA_V1.copy.salesLetter,
+      ctaText: 'Estoy lista para empezar',
+    },
+    offerStackTitle: 'Cierre de oferta',
+    benefits: [
+      'Crear tu primer libro sensorial paso a paso',
+      'Lograr tu primera venta en pocos días',
+      'Aprender cómo hacer libros lindos, útiles y vendibles',
+      'Descubrir cómo cobrar sin miedo y vender con seguridad',
+      'Empezar con un proyecto creativo con propósito desde casa',
+      'Trabajar con modelos listos para crear y vender',
+    ],
+    specialOfferTitle: '¿Qué lograrás con Lánzate con tu Primer Libro Sensorial?',
+    specialOfferSubtitle:
+      'Generar tus <strong>primeros ingresos desde casa</strong> creando libros sensoriales para niños, incluso si hoy no tienes experiencia ni sabes por dónde empezar.',
+    specialOfferGuarantee: 'Pago 100% seguro • Acceso inmediato',
+    specialOfferImage: '',
+    presentationPreTitle: '',
+    presentationTitle: 'LÁNZATE CON TU PRIMER LIBRO SENSORIAL',
+    presentationImage: '/assets/muckup-con-pame.webp',
+    presentationCtaText: 'Acceder a Lánzate con tu Primer Libro Sensorial',
+    finalCtaText: 'Quiero comprar ahora',
+    showPainPoints: false,
+    showSalesLetter: false,
+    confidenceBooster: {
+      headline: '¿Miedo a no saber si vas por buen camino?',
+      paragraphs: [
+        'No te preocupes, aquí tienes la ruta exacta para crear tu primer libro sensorial y llevarlo a tu primera venta sin perder tiempo ni dudar en el proceso.',
+        'Será como si me tuvieras a tu lado acompañándote en cada etapa…',
+        'Para que avances con total seguridad: sin dudas, sin perder tiempo y trabajando desde el día 1 como una experta.',
+      ],
+      bullets: [
+        'Checklist de verificación en cada etapa',
+        'Videos guía para romper miedos y resolver dudas mientras avanzas',
+      ],
+    },
+    sewingBonus: {
+      title: 'Bono de principiante a experta cosiendo',
+      image: '/assets/de_principiante_a_experta_cosiendo.webp',
+      description:
+        'Si no sabes coser o no tienes máquina, te incluyo un bono Principiante a experta cosiendo, para que puedas empezar sin problema con puntadas sencillas y fáciles.',
+    },
+    modules: [
+      {
+        title: 'Masterclass: De 0 a tu primera venta',
+        value: '$97',
+        description:
+          'Descubrirás mi estrategia probada de cómo lograr tu primera venta de libros sensoriales en pocos días sin perder tiempo dudando ni pensando qué hacer.',
+        image: '/assets/masterclass_de_cero_tu_primera_venta.webp',
+      },
+      {
+        title: '3 modelos de libros sensoriales listos para crear y vender',
+        value: '$97',
+        description:
+          'Arranca con modelos de libros sensoriales lindos, atractivos y vendibles con mi método AES y el paso a paso que puedes replicar fácilmente para empezar. No empiezas de cero, empiezas con modelos listos para vender.',
+        image: '/assets/3libros_sensoriales.webp',
+      },
+      {
+        title: '2 kits adicionales con diseños novedosos',
+        value: '$47',
+        description:
+          'Diferénciate y aumenta tus ingresos con 2 kits adicionales listos para crear y vender. Tendrás más opciones para ofrecer y más oportunidades de generar ingresos con libros sensoriales tiernos, atractivos y vendibles.',
+        image: '/assets/2proyectos_de_juguetes_didacticos.webp',
+      },
+      {
+        title: 'Plantillas de mensajes listas para cerrar tus primeras ventas',
+        value: '$47',
+        description:
+          'Genera ventas en pocos días sabiendo qué decir, cómo responder y cómo cerrar sin sentirte incómoda. Obtén claridad absoluta con esta herramienta.',
+        image: '/assets/plantillas_para_vender_whatsApp_.webp',
+      },
+      {
+        title: 'Cómo poner precios justos sin complicarte',
+        value: '$97',
+        description:
+          'Mi fórmula mágica para no regalar tu trabajo, cobrar bien por tu trabajo con precios justos. Pierde el miedo a cobrar definitivamente.',
+        image: '/assets/precios_sin_dramas.webp',
+      },
+      {
+        title: 'Fotos y videos que venden',
+        value: '$47',
+        description:
+          'Mis técnicas para tomar fotos y videos que venden libros sensoriales, para que generen interés y te escriban diciendo “quiero uno”, usando solo tu celular.',
+        image: '/assets/fotos_y_videos_que_venden.webp',
+      },
+      {
+        title: 'Lista maestra de materiales',
+        value: '$27',
+        description:
+          'Mis secretos para elegir materiales lindos y funcionales para que sepas exactamente qué usar sin gastar de más ni confundirte.',
+        image: '/assets/guia_maestra_de_materiales.webp',
+      },
+      {
+        title: 'Envío perfecto',
+        value: '$47',
+        description:
+          'Conquista a tus clientes para que te compren una y otra vez con ideas de empaques lindos, económicos y prácticos. Para que enamores a tus clientes y aumenten el valor percibido.',
+        image: '/assets/kit_envIo_perfecto.webp',
+      },
+    ],
+    fastActionBonus: {
+      timeLimit: 'Si te inscribes en los próximos 60 minutos',
+      title: '🚀 Sistema Lánzate en 7 días',
+      subtitle: 'Crea y valida tu primer libro sensorial paso a paso',
+      value: '$47',
+      image: '/assets/masterclass_de_cero_tu_primera_venta.webp',
+    },
+  },
+} as const satisfies DnaConfig;
+
+export type FunnelVersion = 'v1' | 'v2';
+
+export const DNA_BY_VERSION = {
+  v1: DNA_V1,
+  v2: DNA_V2,
+} as const satisfies Record<FunnelVersion, DnaConfig>;
+
+export const DNA = DNA_V2;
+
+export function getDnaNumericPrices(dna: DnaConfig) {
+  return {
+    main: parsePrice(dna.prices.main),
+    bump: parsePrice(dna.prices.bump),
+    totalValue: parsePrice(dna.prices.totalValue),
+    regular: parsePrice(dna.prices.regular),
+    regularPrice: parsePrice(dna.prices.regularPrice),
+    savings: dna.prices.savings ? parsePrice(dna.prices.savings) : undefined,
+  } as const;
+}
+
+export const dnaNumericPrices = getDnaNumericPrices(DNA);
+
+export function resolveFunnelVersionFromPath(pathname: string): FunnelVersion {
+  return pathname === '/v1' || pathname === '/libro-v1' ? 'v1' : 'v2';
+}
+
+export function resolveDnaForPath(pathname: string): DnaConfig {
+  return DNA_BY_VERSION[resolveFunnelVersionFromPath(pathname)];
+}
 
 export function resolveDnaDocumentTheme(theme: DnaTheme = DNA.theme) {
   return theme === 'expert' ? 'theme-expert' : 'theme-panda';
@@ -424,24 +588,24 @@ export function resolveDnaFunnelTheme(theme: DnaTheme = DNA.theme) {
   return theme === 'expert' ? 'theme-expert' : 'theme-panda';
 }
 
-export function resolveDnaThemeStyle() {
+export function resolveDnaThemeStyle(dna: DnaConfig = DNA) {
   return {
-    '--font-sans': `'${DNA.fonts.sans}', sans-serif`,
-    '--font-body': `'${DNA.fonts.body}', sans-serif`,
-    '--color-page': toRgbTriplet(DNA.surface.page),
-    '--color-surface': toRgbTriplet(DNA.surface.panel),
-    '--color-primary': toRgbTriplet(DNA.colors.primary),
-    '--color-secondary': toRgbTriplet(DNA.colors.accent),
-    '--color-highlight': toRgbTriplet(DNA.colors.highlight),
-    '--color-accent': toRgbTriplet(DNA.cta.bg),
-    '--color-border-subtle': toRgbTriplet(DNA.text.main),
-    '--color-text-main': toRgbTriplet(DNA.text.main),
-    '--color-text-muted': toRgbTriplet(DNA.text.muted),
-    '--color-brand-primary': toRgbTriplet(DNA.colors.primary),
-    '--color-brand-accent': toRgbTriplet(DNA.colors.accent),
-    '--color-cta-base': toRgbTriplet(DNA.cta.bg),
-    '--color-cta-hover': toRgbTriplet(DNA.cta.hoverBg),
-    '--color-cta-text': toRgbTriplet(DNA.cta.text),
-    '--color-surface-bump': toRgbTriplet(DNA.surface.panel),
+    '--font-sans': `'${dna.fonts.sans}', sans-serif`,
+    '--font-body': `'${dna.fonts.body}', sans-serif`,
+    '--color-page': toRgbTriplet(dna.surface.page),
+    '--color-surface': toRgbTriplet(dna.surface.panel),
+    '--color-primary': toRgbTriplet(dna.colors.primary),
+    '--color-secondary': toRgbTriplet(dna.colors.accent),
+    '--color-highlight': toRgbTriplet(dna.colors.highlight),
+    '--color-accent': toRgbTriplet(dna.cta.bg),
+    '--color-border-subtle': toRgbTriplet(dna.text.main),
+    '--color-text-main': toRgbTriplet(dna.text.main),
+    '--color-text-muted': toRgbTriplet(dna.text.muted),
+    '--color-brand-primary': toRgbTriplet(dna.colors.primary),
+    '--color-brand-accent': toRgbTriplet(dna.colors.accent),
+    '--color-cta-base': toRgbTriplet(dna.cta.bg),
+    '--color-cta-hover': toRgbTriplet(dna.cta.hoverBg),
+    '--color-cta-text': toRgbTriplet(dna.cta.text),
+    '--color-surface-bump': toRgbTriplet(dna.surface.panel),
   } as const;
 }
