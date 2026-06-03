@@ -437,13 +437,13 @@ export const DNA_V2 = {
     headline: 'Descubre cómo empezar a generar ingresos extra con libros sensoriales desde casa esta misma semana.',
     headlineHighlight: '',
     subheadline:
-      'Y da tus primeros pasos para construir un negocio propio que combine tu amor por los niños y por las manualidades.',
+      'Y da tus primeros pasos para construir un negocio propio que combine tu amor por los niños y las manualidades.',
     ctaText: 'Estoy lista para empezar',
     salesLetter: {
       ...DNA_V1.copy.salesLetter,
       ctaText: 'Estoy lista para empezar',
     },
-    offerStackTitle: 'Cierre de oferta',
+    offerStackTitle: 'Mira lo que te llevas',
     benefits: [
       'Crear tu primer libro sensorial paso a paso',
       'Lograr tu primera venta en pocos días',
@@ -545,7 +545,7 @@ export const DNA_V2 = {
       title: '🚀 Sistema Lánzate en 7 días',
       subtitle: 'Crea y valida tu primer libro sensorial paso a paso',
       value: '$47',
-      image: '/assets/masterclass_de_cero_tu_primera_venta.webp',
+      image: '/assets/sistema-lanzate.webp',
     },
   },
 } as const satisfies DnaConfig;
