@@ -42,12 +42,15 @@ export function ExpertProductPresentation() {
         </div>
 
         {showOffer ? (
-          <div className="mx-auto mt-8 max-w-[620px] rounded-2xl border border-gray-100 bg-white p-5 shadow-[0_18px_50px_rgba(17,17,17,0.08)] sm:p-7">
-            <p className="text-base font-bold text-gray-400 line-through sm:text-lg">
-              Valor normal ${dna.prices.regular}
+          <div className="mx-auto mt-8 max-w-[620px] rounded-2xl border border-brand-accent/15 bg-white p-5 shadow-[0_22px_60px_rgba(107,67,155,0.12)] sm:p-7">
+            <p className="text-base font-bold text-gray-500 line-through sm:text-lg">
+              Valor normal: US${dna.prices.regular}
             </p>
-            <p className="mt-1 text-3xl font-black text-gray-950 sm:text-4xl">
-              Valor hoy <span className="text-brand-primary">${dna.prices.main}</span>
+            <p className="mt-3 text-xl font-black uppercase text-gray-950 sm:text-2xl">
+              Hoy solo
+            </p>
+            <p className="mt-1 text-[4.25rem] font-black leading-none text-brand-primary sm:text-[5.5rem]">
+              US${dna.prices.main}
             </p>
             <div className="mx-auto mt-5 max-w-md">
               <ExpertCtaButton href="#checkout" label={dna.copy.presentationCtaText ?? dna.copy.ctaText} fullWidth />

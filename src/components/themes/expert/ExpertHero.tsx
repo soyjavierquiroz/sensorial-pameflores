@@ -20,19 +20,39 @@ export function ExpertHero({ onReveal }: ExpertHeroProps) {
     }
   };
 
+  const headlineContent = isV2 ? (
+    <>
+      Descubre cómo empezar a generar{' '}
+      <span className="relative inline-block text-brand-primary">
+        ingresos extra
+        <span className="absolute inset-x-0 bottom-0 h-[0.18em] rounded-full bg-brand-accent/20" />
+      </span>{' '}
+      con libros sensoriales desde casa{' '}
+      <span className="relative inline-block text-brand-accent">
+        esta misma semana
+        <span className="absolute inset-x-0 bottom-0 h-[0.18em] rounded-full bg-brand-primary/15" />
+      </span>
+      .
+    </>
+  ) : (
+    <>
+      {dna.copy.headline}{' '}
+      {dna.copy.headlineHighlight ? (
+        <span className="text-brand-primary">{dna.copy.headlineHighlight}</span>
+      ) : null}
+    </>
+  );
+
   return (
     <section className={isV2 ? 'border-b border-gray-200 bg-white pb-12 sm:pb-16' : 'border-b border-gray-200 bg-white pb-[60px]'}>
       <div className={isV2 ? 'mx-auto max-w-[1225px] px-4 pt-5 sm:px-6' : 'mx-auto max-w-[1225px] px-4 pt-4 sm:px-6'}>
         <div className={isV2 ? 'mx-auto mt-2 w-full max-w-[1120px] md:mt-8 xl:max-w-[1200px]' : 'mx-auto mt-4 w-full max-w-[1200px] md:mt-8 xl:max-w-[1300px]'}>
           <h1 className={isV2 ? 'font-sans mt-4 text-center text-[1.85rem] font-black leading-[1.08] text-gray-950 sm:text-[2.75rem] lg:text-[3.4rem]' : 'font-sans mt-[20px] text-center text-[1.5rem] font-black uppercase leading-[1.1] tracking-[-0.02em] text-gray-900 sm:text-[2.4rem] lg:text-[3rem]'}>
-            {dna.copy.headline}{' '}
-            {dna.copy.headlineHighlight ? (
-              <span className="text-brand-primary">{dna.copy.headlineHighlight}</span>
-            ) : null}
+            {headlineContent}
           </h1>
 
           {dna.copy.subheadline && (
-            <p className={isV2 ? 'font-sans mx-auto mt-5 w-full max-w-[860px] text-center text-[1.05rem] font-semibold leading-relaxed text-gray-700 sm:mt-6 sm:text-[1.35rem]' : 'font-sans mx-auto mt-4 w-full text-center text-[1.1rem] font-medium leading-relaxed text-gray-700 sm:mt-6 sm:text-[1.3rem]'}>
+            <p className={isV2 ? 'font-sans mx-auto mt-5 w-full max-w-[860px] text-center text-[1.12rem] font-semibold leading-relaxed text-gray-800 sm:mt-6 sm:text-[1.35rem]' : 'font-sans mx-auto mt-4 w-full text-center text-[1.1rem] font-medium leading-relaxed text-gray-700 sm:mt-6 sm:text-[1.3rem]'}>
               {dna.copy.subheadline}
             </p>
           )}
@@ -41,10 +61,10 @@ export function ExpertHero({ onReveal }: ExpertHeroProps) {
         <div className={isV2 ? 'mx-auto mt-5 flex max-w-[850px] flex-col items-center md:mt-8' : 'mx-auto mt-[10px] flex max-w-[850px] flex-col items-center md:mt-6'}>
           <div className="w-full">
             <div className="relative flex w-full flex-col overflow-hidden rounded-2xl border-[4px] border-brand-primary bg-gray-900 shadow-2xl md:border-[6px]">
-              <div className="flex items-center justify-center gap-[5px] bg-brand-accent px-[5px] py-[11px] text-center text-white">
-                <Volume2 className="h-4 w-4 shrink-0" />
-                <p className="font-sans text-[12px] font-bold uppercase tracking-[0.08em] leading-[1.3] sm:text-[16px] sm:leading-none">
-                  Enciende tus parlantes
+              <div className={isV2 ? 'flex items-center justify-center gap-1 bg-brand-accent px-2 py-2.5 text-center text-white sm:gap-2 sm:py-3' : 'flex items-center justify-center gap-[5px] bg-brand-accent px-[5px] py-[11px] text-center text-white'}>
+                {isV2 ? null : <Volume2 className="h-4 w-4 shrink-0" />}
+                <p className={isV2 ? 'font-sans whitespace-nowrap text-[10px] font-black uppercase leading-none tracking-[0.02em] min-[390px]:text-[11px] sm:text-[15px]' : 'font-sans text-[12px] font-bold uppercase tracking-[0.08em] leading-[1.3] sm:text-[16px] sm:leading-none'}>
+                  {isV2 ? '🔊 Toca el video para activar el sonido' : 'Enciende tus parlantes'}
                 </p>
               </div>
 
