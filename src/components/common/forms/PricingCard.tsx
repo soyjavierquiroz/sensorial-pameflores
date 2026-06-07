@@ -1,6 +1,7 @@
 import { BadgeCheck, Lock, ShieldCheck } from 'lucide-react';
 import { useMemo } from 'react';
-import { DNA } from '../../../dna.config';
+import { useLocation } from 'react-router-dom';
+import { DNA, resolveCheckoutUrlForPath } from '../../../dna.config';
 import funnelConfig from '../../../core/config/funnel.config';
 import { useVisitor } from '../../../core/visitor/VisitorContext';
 import { useHotmartPrices } from '../../../core/hooks/useHotmartPrices';
@@ -12,12 +13,13 @@ export interface PricingCardProps {
 }
 
 export function PricingCard({ productId, productName }: PricingCardProps) {
+  const location = useLocation();
   const { visitorData } = useVisitor();
   const { product, resolvedProductKey, scrapedData, status, hasRequestedProduct } = useHotmartPrices(productId);
 
   const countryCode = visitorData?.country_code?.toUpperCase() ?? 'US';
   const currencyCode = visitorData?.currency?.toUpperCase() ?? 'USD';
-  const resolvedCheckoutUrl = hasRequestedProduct ? product.checkoutUrl : undefined;
+  const resolvedCheckoutUrl = hasRequestedProduct ? resolveCheckoutUrlForPath(location.pathname) : undefined;
   const resolvedProductName = productName ?? DNA.copy.productName ?? funnelConfig.brandName;
   const basePriceUSD = product.basePriceUSD;
 

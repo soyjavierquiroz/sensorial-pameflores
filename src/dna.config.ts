@@ -1,5 +1,8 @@
 export type DnaTheme = 'expert' | 'panda';
 
+export const META_ADS_CHECKOUT_URL = 'https://hotm.io/libro-sensorial-a';
+export const ORGANIC_CHECKOUT_URL = 'https://hotm.io/libro-sensorial-o';
+
 export interface DnaConfig {
   theme: DnaTheme;
   fonts: {
@@ -157,6 +160,21 @@ function toRgbTriplet(value: string) {
   return triplet.trim();
 }
 
+function normalizeSalesPathname(pathname: string) {
+  const [pathOnly] = pathname.split(/[?#]/);
+  const normalizedPathname = pathOnly.trim() || '/';
+
+  return normalizedPathname === '/' ? normalizedPathname : normalizedPathname.replace(/\/+$/, '');
+}
+
+export function resolveCheckoutUrlForPath(pathname: string) {
+  const normalizedPathname = normalizeSalesPathname(pathname);
+
+  return normalizedPathname === '/libro' || normalizedPathname === '/libro-v1'
+    ? ORGANIC_CHECKOUT_URL
+    : META_ADS_CHECKOUT_URL;
+}
+
 export const DNA_V1 = {
   theme: 'expert',
   fonts: {
@@ -165,7 +183,7 @@ export const DNA_V1 = {
   },
   vslVideoId: import.meta.env.VITE_VSL_VIDEO_ID ?? '',
   // ENLACE GLOBAL CONECTADO DIRECTO A HOTMART
-  checkoutUrl: 'https://pay.hotmart.com/D75923457J?off=cir53koj&checkoutMode=10',
+  checkoutUrl: META_ADS_CHECKOUT_URL,
   colors: {
     primary: '107 67 155',
     accent: '216 99 184',
@@ -573,7 +591,9 @@ export function getDnaNumericPrices(dna: DnaConfig) {
 export const dnaNumericPrices = getDnaNumericPrices(DNA);
 
 export function resolveFunnelVersionFromPath(pathname: string): FunnelVersion {
-  return pathname === '/v1' || pathname === '/libro-v1' ? 'v1' : 'v2';
+  const normalizedPathname = normalizeSalesPathname(pathname);
+
+  return normalizedPathname === '/v1' || normalizedPathname === '/libro-v1' ? 'v1' : 'v2';
 }
 
 export function resolveDnaForPath(pathname: string): DnaConfig {
