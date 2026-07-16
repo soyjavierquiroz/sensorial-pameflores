@@ -1,7 +1,7 @@
 export type DnaTheme = 'expert' | 'panda';
 
-export const META_ADS_CHECKOUT_URL = 'https://hotm.io/libro-sensorial-a';
-export const ORGANIC_CHECKOUT_URL = 'https://hotm.io/libro-sensorial-o';
+export const META_ADS_CHECKOUT_URL = 'https://pay.hotmart.com/D75923457J?checkoutMode=10';
+export const ORGANIC_CHECKOUT_URL = 'https://pay.hotmart.com/D75923457J?checkoutMode=10';
 
 export interface DnaConfig {
   theme: DnaTheme;
