@@ -22,17 +22,24 @@ export function ExpertHero({ onReveal }: ExpertHeroProps) {
 
   const headlineContent = isV2 ? (
     <>
-      Descubre cómo empezar a generar{' '}
+      CREA{' '}
       <span className="relative inline-block text-brand-primary">
-        ingresos extra
+        TUS PRIMEROS
         <span className="absolute inset-x-0 bottom-0 h-[0.18em] rounded-full bg-brand-accent/20" />
       </span>{' '}
-      con libros sensoriales desde casa{' '}
-      <span className="relative inline-block text-brand-accent">
-        esta misma semana
-        <span className="absolute inset-x-0 bottom-0 h-[0.18em] rounded-full bg-brand-primary/15" />
+      LIBROS SENSORIALES
+      <span className="block">
+        <span className="relative inline-block text-brand-accent">
+          esta misma semana
+          <span className="absolute inset-x-0 bottom-0 h-[0.18em] rounded-full bg-brand-primary/15" />
+        </span>
+        ,{' '}
+        <span className="relative inline-block text-brand-primary">
+          desde cero
+          <span className="absolute inset-x-0 bottom-0 h-[0.18em] rounded-full bg-brand-accent/20" />
+        </span>
+        .
       </span>
-      .
     </>
   ) : (
     <>
@@ -53,7 +60,9 @@ export function ExpertHero({ onReveal }: ExpertHeroProps) {
 
           {dna.copy.subheadline && (
             <p className={isV2 ? 'font-sans mx-auto mt-5 w-full max-w-[860px] text-center text-[1.12rem] font-semibold leading-relaxed text-gray-800 sm:mt-6 sm:text-[1.35rem]' : 'font-sans mx-auto mt-4 w-full text-center text-[1.1rem] font-medium leading-relaxed text-gray-700 sm:mt-6 sm:text-[1.3rem]'}>
-              {dna.copy.subheadline}
+              {isV2
+                ? 'Con mi método paso a paso para crear libros sensoriales hermosos, educativos y listos para vender, incluso si hoy no tienes experiencia.'
+                : dna.copy.subheadline}
             </p>
           )}
         </div>
