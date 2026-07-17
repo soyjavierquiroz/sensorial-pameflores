@@ -22,23 +22,23 @@ export function ExpertHero({ onReveal }: ExpertHeroProps) {
 
   const headlineContent = isV2 ? (
     <>
-      CREA{' '}
-      <span className="relative inline-block text-brand-primary">
-        TUS PRIMEROS
-        <span className="absolute inset-x-0 bottom-0 h-[0.18em] rounded-full bg-brand-accent/20" />
-      </span>{' '}
-      LIBROS SENSORIALES
+      <span className="block lg:whitespace-nowrap">
+        CREA{' '}
+        <span className="relative inline-block text-brand-primary">
+          TUS PRIMEROS
+          <span className="absolute inset-x-0 bottom-0 h-[0.18em] rounded-full bg-brand-accent/20" />
+        </span>{' '}
+        LIBROS SENSORIALES
+      </span>
       <span className="block">
         <span className="relative inline-block text-brand-accent">
-          esta misma semana
+          esta misma semana,
           <span className="absolute inset-x-0 bottom-0 h-[0.18em] rounded-full bg-brand-primary/15" />
-        </span>
-        ,{' '}
+        </span>{' '}
         <span className="relative inline-block text-brand-primary">
           desde cero
           <span className="absolute inset-x-0 bottom-0 h-[0.18em] rounded-full bg-brand-accent/20" />
         </span>
-        .
       </span>
     </>
   ) : (
@@ -54,7 +54,7 @@ export function ExpertHero({ onReveal }: ExpertHeroProps) {
     <section className={isV2 ? 'border-b border-gray-200 bg-white pb-12 sm:pb-16' : 'border-b border-gray-200 bg-white pb-[60px]'}>
       <div className={isV2 ? 'mx-auto max-w-[1225px] px-4 pt-5 sm:px-6' : 'mx-auto max-w-[1225px] px-4 pt-4 sm:px-6'}>
         <div className={isV2 ? 'mx-auto mt-2 w-full max-w-[1120px] md:mt-8 xl:max-w-[1200px]' : 'mx-auto mt-4 w-full max-w-[1200px] md:mt-8 xl:max-w-[1300px]'}>
-          <h1 className={isV2 ? 'font-sans mt-4 text-center text-[1.85rem] font-black leading-[1.08] text-gray-950 sm:text-[2.75rem] lg:text-[3.4rem]' : 'font-sans mt-[20px] text-center text-[1.5rem] font-black uppercase leading-[1.1] tracking-[-0.02em] text-gray-900 sm:text-[2.4rem] lg:text-[3rem]'}>
+          <h1 className={isV2 ? 'font-sans mt-4 text-center text-[1.85rem] font-black leading-[1.08] tracking-[-0.02em] text-gray-950 sm:text-[2.25rem] lg:text-[2.65rem] xl:text-[3rem]' : 'font-sans mt-[20px] text-center text-[1.5rem] font-black uppercase leading-[1.1] tracking-[-0.02em] text-gray-900 sm:text-[2.4rem] lg:text-[3rem]'}>
             {headlineContent}
           </h1>
 
